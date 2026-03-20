@@ -1,4 +1,4 @@
-import type { OpenLibraryDoc, OpenLibrarySearchResponse } from "@/services/types";
+import type { OpenLibraryDoc, OpenLibrarySearchResponse, OpenLibraryWork } from "@/services/types";
 import type { Book } from "@/types/book";
 
 export default async function searchBooks(
@@ -25,5 +25,22 @@ export default async function searchBooks(
     key: doc.key,
     title: doc.title,
     author_name: doc.author_name ?? [],
+    cover_i: doc.cover_i
   }));
+}
+
+export async function getBookDetails(
+  id: string,
+  signal?: AbortSignal
+): Promise<OpenLibraryWork> {
+  const response = await fetch(
+    `https://openlibrary.org/works/${id}.json`,
+    { signal }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch book details");
+  }
+
+  return response.json();
 }
