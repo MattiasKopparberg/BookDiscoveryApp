@@ -1,27 +1,26 @@
 import { globalStyles } from "@/style/global";
+import type { Book } from "@/types/book";
+import { getCoverUrl } from "@/utils/getCoverUrl";
 import { Image, Text, View } from "react-native";
 
 interface BookCardProps {
-  title: string;
-  author?: string;
-  coverId?: string | null;
+  book: Book;
   children?: React.ReactNode;
 }
 
 export default function BookCard({
-  title,
-  author,
-  coverId,
+  book,
   children,
 }: BookCardProps) {
+
+  const coverUrl = getCoverUrl(book.cover_i);
+
   return (
     <View style={globalStyles.card}>
-      {coverId ? (
+      {coverUrl ? (
         <Image
           style={globalStyles.cover}
-          source={{
-            uri: `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`,
-          }}
+          source={{ uri: coverUrl }}
           resizeMode="cover"
         />
       ) : (
@@ -33,11 +32,13 @@ export default function BookCard({
       )}
 
       <Text style={globalStyles.title} numberOfLines={2}>
-        {title}
+        {book.title}
       </Text>
 
       <Text style={globalStyles.subtitle} numberOfLines={1}>
-        {author ?? "Unknown author"}
+        {book.author_name.length > 0
+          ? book.author_name.join(", ")
+          : "Unknown author"}
       </Text>
 
       {children}

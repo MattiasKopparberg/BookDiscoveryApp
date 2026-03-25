@@ -2,6 +2,7 @@ import FavoritesContext from "@/context/FavoritesContext";
 import { globalStyles } from "@/style/global";
 import type { Book } from "@/types/book";
 import { extractWorkId } from "@/utils/extractWorkId";
+import { getCoverUrl } from "@/utils/getCoverUrl";
 import { useRouter } from "expo-router";
 import { Star, StarOff } from "lucide-react-native";
 import { useContext } from "react";
@@ -15,6 +16,7 @@ export default function BookItem({ book }: BookItemProps) {
   const router = useRouter();
   const { isFavorite, toggleFavorite } = useContext(FavoritesContext);
 
+  const coverUrl = getCoverUrl(book.cover_i);
   const workId = extractWorkId(book.key);
   const favorite = isFavorite(book.key);
 
@@ -25,7 +27,7 @@ export default function BookItem({ book }: BookItemProps) {
       style={{ flex: 1, margin: 6 }}
     >
       <View style={globalStyles.card}>
-        {book.cover_i ? (
+        {coverUrl ? (
           <Image
             style={{
               width: "100%",
@@ -33,9 +35,7 @@ export default function BookItem({ book }: BookItemProps) {
               borderRadius: 6,
               marginBottom: 8,
             }}
-            source={{
-              uri: `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`,
-            }}
+            source={{ uri: coverUrl }}
             resizeMode="cover"
           />
         ) : (

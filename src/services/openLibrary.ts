@@ -42,5 +42,6 @@ export async function getBookDetails(
     throw new Error("Failed to fetch book details");
   }
 
-  return response.json();
+  const data: OpenLibraryWork = await response.json();
+return data;
 }
