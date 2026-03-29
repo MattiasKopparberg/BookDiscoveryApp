@@ -1,24 +1,21 @@
+import type { Book } from "@/types/book";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, ReactNode, useEffect, useMemo, useState } from "react";
 
-
 interface FavoritesContextType {
-  favorites: Record<string, boolean>;
-  toggleFavorite: (bookKey: string) => void;
+  favorites: Book[];
+  toggleFavorite: (book: Book) => void;
   isFavorite: (bookKey: string) => boolean;
 }
 
-
 const FavoritesContext = createContext<FavoritesContextType>({
-  favorites: {},
+  favorites: [],
   toggleFavorite: () => {},
   isFavorite: () => false,
 });
 
-
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
-  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
-
+  const [favorites, setFavorites] = useState<Book[]>([]);
 
   useEffect(() => {
     const loadFavorites = async () => {
@@ -34,7 +31,6 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     loadFavorites();
   }, []);
 
-
   useEffect(() => {
     const saveFavorites = async () => {
       try {
@@ -46,17 +42,21 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     saveFavorites();
   }, [favorites]);
 
+  const toggleFavorite = (book: Book) => {
+    setFavorites((prev) => {
+      const exists = prev.some((b) => b.key === book.key);
 
-  const toggleFavorite = (bookKey: string) => {
-    setFavorites((prev) => ({
-      ...prev,
-      [bookKey]: !prev[bookKey],
-    }));
+      if (exists) {
+        return prev.filter((b) => b.key !== book.key);
+      } else {
+        return [...prev, book];
+      }
+    });
   };
 
-
-  const isFavorite = (bookKey: string) => !!favorites[bookKey];
-
+  const isFavorite = (bookKey: string) => {
+    return favorites.some((b) => b.key === bookKey);
+  };
 
   const value = useMemo(
     () => ({ favorites, toggleFavorite, isFavorite }),

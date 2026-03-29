@@ -26,12 +26,20 @@ export default function RootLayout() {
         }}
         />
         <Tabs.Screen 
-        name="Favorites"
+        name="favorites"
         options={{
+          headerShown: true,
           title: "favorites",
           tabBarIcon: () => (
             <Star />
           )
+        }}
+        />
+        <Tabs.Screen
+        name="book/[id]"
+        options={{
+          headerShown: true,
+          title: "Book Info"
         }}
         />
       </Tabs>

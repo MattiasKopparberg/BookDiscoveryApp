@@ -1,4 +1,8 @@
-import type { OpenLibraryDoc, OpenLibrarySearchResponse, OpenLibraryWork } from "@/services/types";
+import type {
+  OpenLibraryDoc,
+  OpenLibrarySearchResponse,
+  OpenLibraryWork,
+} from "@/services/types";
 import type { Book } from "@/types/book";
 
 export default async function searchBooks(
@@ -25,23 +29,33 @@ export default async function searchBooks(
     key: doc.key,
     title: doc.title,
     author_name: doc.author_name ?? [],
-    cover_i: doc.cover_i
+    cover_i: doc.cover_i,
+    description: "",
   }));
 }
 
 export async function getBookDetails(
   id: string,
-  signal?: AbortSignal
-): Promise<OpenLibraryWork> {
-  const response = await fetch(
-    `https://openlibrary.org/works/${id}.json`,
-    { signal }
-  );
+  signal?: AbortSignal,
+): Promise<Book> {
+  const response = await fetch(`https://openlibrary.org/works/${id}.json`, {
+    signal,
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch book details");
   }
 
   const data: OpenLibraryWork = await response.json();
-return data;
+
+  return {
+    key: data.key,
+    title: data.title,
+    author_name: data.author_name ?? [],
+    cover_i: data.cover_i ? String(data.cover_i) : undefined,
+    description:
+      typeof data.description === "string"
+        ? data.description
+        : (data.description?.value ?? ""),
+  };
 }

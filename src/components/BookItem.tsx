@@ -62,7 +62,7 @@ export default function BookItem({ book }: BookItemProps) {
           {book.author_name?.join(", ") ?? "Unknown author"}
         </Text>
 
-        <Pressable onPress={() => toggleFavorite(book.key)}>
+        <Pressable onPress={() => toggleFavorite(book)}>
           {favorite ? (
             <StarOff size={24} color="#FBBF24" />
           ) : (

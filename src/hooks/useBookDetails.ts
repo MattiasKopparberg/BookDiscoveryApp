@@ -1,17 +1,17 @@
 import { getBookDetails } from "@/services/openLibrary";
-import type { OpenLibraryWork } from "@/services/types";
+import type { Book } from "@/types/book";
 import { useEffect, useState } from "react";
 
 export function useBookDetails(id: string) {
-  const [book, setBook] = useState<OpenLibraryWork | null>(null);
+  const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-  if (!id) {
-    setBook(null);
-    return;
-  }
+    if (!id) {
+      setBook(null);
+      return;
+    }
 
     const controller = new AbortController();
 

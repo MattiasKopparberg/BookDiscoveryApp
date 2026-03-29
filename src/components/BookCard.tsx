@@ -18,18 +18,31 @@ export default function BookCard({
   return (
     <View style={globalStyles.card}>
       {coverUrl ? (
-        <Image
-          style={globalStyles.cover}
-          source={{ uri: coverUrl }}
-          resizeMode="cover"
-        />
-      ) : (
-        <View style={globalStyles.coverPlaceholder}>
-          <Text style={globalStyles.coverPlaceholderText}>
-            No cover
-          </Text>
-        </View>
-      )}
+          <Image
+            style={{
+              width: "100%",
+              height: 180,
+              borderRadius: 6,
+              marginBottom: 8,
+            }}
+            source={{ uri: coverUrl }}
+            resizeMode="cover"
+          />
+        ) : (
+          <View
+            style={{
+              width: "100%",
+              height: 180,
+              borderRadius: 6,
+              marginBottom: 8,
+              backgroundColor: "#E5E7EB",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text style={globalStyles.coverPlaceholderText}>No cover</Text>
+          </View>
+        )}
 
       <Text style={globalStyles.title} numberOfLines={2}>
         {book.title}

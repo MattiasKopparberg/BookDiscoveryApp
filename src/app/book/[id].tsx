@@ -24,28 +24,24 @@ export default function BookDetailScreen() {
       {error && <Text style={globalStyles.error}>{error}</Text>}
       
       {!loading && !error && book ? (
-        <BookCard
-        title={book.title}
-        coverId={book.cover_i?.[0] ?? null}
-      >
-        <View style={{ marginTop: 12 }}>
-          <Pressable onPress={() => toggleFavorite(book.key)}>
-            {favorite ? (
-              <Star size={28} color="#FBBF24" />
-            ) : (
-              <StarOff size={28} color="#9CA3AF" />
-            )}
-          </Pressable>
-        </View>
+        <BookCard book={book}>
+          <Text style={globalStyles.text}>{book.title}</Text>
+          <View style={{ marginTop: 12 }}>
+            <Pressable onPress={() => toggleFavorite(book)}>
+              {favorite ? (
+                <Star size={28} color="#FBBF24" />
+              ) : (
+                <StarOff size={28} color="#9CA3AF" />
+              )}
+            </Pressable>
+          </View>
 
-        {book.description && (
-          <Text style={{ marginTop: 16, color: "#374151" }}>
-            {typeof book.description === "string"
-              ? book.description
-              : book.description.value}
-          </Text>
-        )}
-      </BookCard>
+          {book.description && (
+            <Text style={{ marginTop: 16, color: "#374151" }}>
+              {book.description}
+            </Text>
+          )}
+        </BookCard>
       ): !loading && !error && (
         <Text style={globalStyles.text}>Book not found.</Text>
       )}
