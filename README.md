@@ -1,56 +1,82 @@
-# Welcome to your Expo app 👋
+# 📚 BookDiscoveryApp
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native mobile application for discovering, searching, and saving books using the OpenLibrary API.
 
-## Get started
+## 🚀 Overview
 
-1. Install dependencies
+BookDiscoveryApp allows users to explore books, view details, and save favorites. The goal of the project was not only to build functionality, but to focus on clean architecture, separation of concerns, and scalable code structure.
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+- 🔍 Search for books via OpenLibrary API  
+- 📖 View book details  
+- ⭐ Save and manage favorite books  
+- ⚡ Handle asynchronous data and loading states  
+- 📱 Mobile-first UI built with React Native  
 
-   ```bash
-   npx expo start
-   ```
+## 🛠️ Tech Stack
 
-In the output, you'll find options to open the app in a
+- React Native  
+- TypeScript  
+- JavaScript (ES6+)  
+- OpenLibrary API  
+- Tailwind (NativeWind)  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🧠 Architecture & Approach
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+This project focuses on writing maintainable and scalable code:
 
-## Get a fresh project
+- Separation of concerns using a **service layer** for API calls  
+- Component-based architecture  
+- Reusable and structured UI components  
+- Focus on **DRY principles**  
+- Handling **edge cases** such as empty responses and slow API calls  
 
-When you're ready, run:
+## ⚙️ Installation & Setup
+
 
 ```bash
-npm run reset-project
+git clone https://github.com/MattiasKopparberg/BookDiscoveryApp.git
+cd BookDiscoveryApp
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Install dependencies:
+```bash
+npm install
+```
+Start the app:
+```bash
 
-### Other setup steps
+npx expo start
+```
+```bash
+📂 Project Structure
+/src
+  /components     # Reusable UI components
+  /services       # API logic (data fetching)
+  /screens        # App screens
+  /utils          # Helper functions
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+# 🚧 Current Status
+Core functionality complete
+Favorites and info pages implemented
+UI improvements and styling still in progress
 
-## Learn more
+# 📚 What I Learned
+Structuring a React Native app for scalability
+Managing async data and API integrations
+Separating logic from UI using a service layer
+Thinking beyond "it works" → focusing on clean, maintainable code
 
-To learn more about developing your project with Expo, look at the following resources:
+# 📌 Future Improvements
+Improve UI/UX and styling consistency
+Add better error handling and loading states
+Enhance favorites functionality
+Optimize performance
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
+# 👤 Author
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Mattias Kopparberg
+GitHub
